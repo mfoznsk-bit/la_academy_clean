@@ -17,10 +17,17 @@ import {
 } from 'lucide-react';
 
 // Counter component
-const Counter = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
+type CounterProps = {
+  end: number;        // the target number to count up to
+  duration?: number;  // optional, default 2000
+  prefix?: string;    // optional string before number
+  suffix?: string;    // optional string after number
+};
+
+const Counter = ({ end, duration = 2000, prefix = '', suffix = '' }: CounterProps) => {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
